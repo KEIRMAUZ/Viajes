@@ -1,6 +1,9 @@
 import React from 'react';
 import './Seccion3.css';
 import { useNavigate } from 'react-router-dom';
+import {CuloDeArmando} from '../assets/italia2.jpg'
+import {CuloDeArmando2} from '../assets/japon2.jpg'
+import {CuloDeArmando3} from '../assets/mexico.jpg'
 
 const Seccion3 = () => {
   const navigate = useNavigate();
@@ -30,9 +33,9 @@ const Seccion3 = () => {
         </div>
 
         <div className="oferta-images">
-          <img src="/src/assets/italia2.jpg" alt="Destino 1" className="img img1" />
-          <img src="/src/assets/japon2.jpg" alt="Destino 2" className="img img2" />
-          <img src="/src/assets/mexico.jpg" alt="Destino 3" className="img img3" />
+          <img src={CuloDeArmando} alt="Destino 1" className="img img1" />
+          <img src={CuloDeArmando2} alt="Destino 2" className="img img2" />
+          <img src={CuloDeArmando3} alt="Destino 3" className="img img3" />
         </div>
       </div>
     </section>
