@@ -257,3 +257,11 @@
     display: none;
   }
 }
+/* Dentro de styles/loginForm.css o el archivo de estilos que uses */
+
+.auth-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacio entre los botones */
+  margin-top: 15px;
+}

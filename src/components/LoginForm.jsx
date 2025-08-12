@@ -58,14 +58,11 @@ const LoginForm = ({ onSuccess }) => {
           </div>
         </div>
       </div>
-
-
       <div className="login-links-container">
-      <form className="login-auth-form" onSubmit={handleLogin}>
+        <form className="login-auth-form" onSubmit={handleLogin}>
           <h2 className="login-form-title">Inicia sesión</h2>
           
           <div className="input-group">
-            
             <input
               className="login-input"
               id="email"
@@ -97,9 +94,16 @@ const LoginForm = ({ onSuccess }) => {
           <button className="login-btn-submit" type="submit" disabled={loading}>
             {loading ? 'Iniciando...' : 'Iniciar Sesión'}
           </button>
-          <button className="login-link-btn" type="button" onClick={() => navigate('/register')}>No tengo una cuenta</button>
 
-          
+          {/* Nuevo contenedor para los enlaces */}
+          <div className="auth-links">
+            <button className="login-link-btn" type="button" onClick={() => navigate('/register')}>
+              No tengo una cuenta
+            </button>
+            <button className="login-link-btn" type="button" onClick={() => navigate('/')}>
+              Regresar al inicio
+            </button>
+          </div>
           
           {message && <div className={`login-auth-message ${message.includes('exitoso') ? 'success' : 'error'}`}>{message}</div>}
         </form>
