@@ -1,9 +1,9 @@
 import React from 'react';
 import './Seccion3.css';
 import { useNavigate } from 'react-router-dom';
-import {CuloDeArmando} from '../assets/italia2.jpg'
-import {CuloDeArmando2} from '../assets/japon2.jpg'
-import {CuloDeArmando3} from '../assets/mexico.jpg'
+import CuloDeArmando from '../assets/italia2.jpg'
+import CuloDeArmando2 from '../assets/japon2.jpg'
+import CuloDeArmando3 from '../assets/mexico.jpg'
 
 const Seccion3 = () => {
   const navigate = useNavigate();
