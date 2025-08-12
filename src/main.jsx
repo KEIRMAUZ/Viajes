@@ -12,13 +12,13 @@ import Seccion2 from './components/seccion2.jsx';
 import Seccion3 from './components/seccion3.jsx';
 import Seccion4 from './components/seccion4.jsx';
 import Seccion5 from './components/seccion5.jsx';
-import Seccion6 from './components/seccion6.jsx';
+import Seccion6 from './components/Seccion6.jsx';
 import Seccion7 from './components/Seccion7.jsx';
 import Seccion8 from './components/Seccion8.jsx';
 
 import Seccion10 from './components/seccion10.jsx';
 
-import Seccion9 from './components/Seccion9.jsx';
+import Seccion9 from './components/seccion9.jsx';
 import LoginForm from './components/LoginForm.jsx';
 import RegisterForm from './components/RegisterForm.jsx';
 import RecoveryForm from './components/RecoveryForm.jsx';
