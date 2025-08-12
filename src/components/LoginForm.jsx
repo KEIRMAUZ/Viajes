@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/loginForm.css';
 import './loginCard.css';
+import loginImg from '../assets/loginCard.png'
 
 const LoginForm = ({ onSuccess }) => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
@@ -44,7 +45,7 @@ const LoginForm = ({ onSuccess }) => {
       <div className="login-form-container">
         <div className="card-container">
           <img
-            src="/src/assets/loginCard.png" // O usa import si la imagen está en tu proyecto
+            src={loginImg} 
             alt="París ilustración"
             className="card-image"
           />

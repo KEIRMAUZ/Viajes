@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/RecoveryForm.css';
+import passwordRecuperar from '../assets/loginCard.png'
 import './loginCard.css'; // Asegúrate de tener esta ruta
 
 const RecoveryForm = () => {
@@ -102,7 +103,7 @@ const RecoveryForm = () => {
         <div className="recovery-form-container">
           <div className="card-container">
             <img
-              src="/src/assets/loginCard.png" // O usa import si la imagen está en tu proyecto
+              src={passwordRecuperar} // O usa import si la imagen está en tu proyecto
               alt="París ilustración"
               className="card-image"
             />
