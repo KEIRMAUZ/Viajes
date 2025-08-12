@@ -23,7 +23,7 @@ const countryDetails = {
   },
   Italia: {
     title: 'Italia',
-    image: italia',
+    image: italia,
     description: 'Italia es un país lleno de historia, arte y belleza natural. Entre sus principales atractivos están los restos de la Antigua Roma, el arte del Renacimiento y la arquitectura barroca. Su gastronomía es reconocida mundialmente por platos como la pizza, la pasta y sus excelentes vinos. Ofrece paisajes variados como la costa Amalfitana, los lagos del norte y los Alpes. Sus ciudades más destacadas son Roma, Florencia y Venecia, todas con un gran valor cultural. Además, Italia celebra festivales emblemáticos como el Carnaval de Venecia y la Fiesta de la República.'
   }
 };
