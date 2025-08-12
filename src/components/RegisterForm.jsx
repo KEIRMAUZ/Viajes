@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import './styles/register.css';
 
 const RegisterForm = () => {
@@ -9,7 +10,7 @@ const RegisterForm = () => {
     password: '',
     confirmPassword: '',
     securityQuestion: '',
-    securityAnswer: ''
+    securityAnswer: '',
   });
   const [message, setMessage] = useState('');
   const [isSQOpen, setIsSQOpen] = useState(false);
@@ -18,18 +19,18 @@ const RegisterForm = () => {
   const SECURITY_QUESTIONS = [
     '¿Cuál es el nombre de tu primera mascota?',
     '¿En qué ciudad naciste?',
-    '¿Cuál es tu comida favorita?'
+    '¿Cuál es tu comida favorita?',
   ];
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setRegisterData(prev => ({ ...prev, [name]: value }));
+    setRegisterData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSelectSQ = (value) => {
-    setRegisterData(prev => ({ ...prev, securityQuestion: value }));
+    setRegisterData((prev) => ({ ...prev, securityQuestion: value }));
     setIsSQOpen(false);
   };
 
@@ -39,7 +40,9 @@ const RegisterForm = () => {
         setIsSQOpen(false);
       }
     };
-    const onEsc = (e) => { if (e.key === 'Escape') setIsSQOpen(false); };
+    const onEsc = (e) => {
+      if (e.key === 'Escape') setIsSQOpen(false);
+    };
     document.addEventListener('mousedown', onClickOutside);
     document.addEventListener('keydown', onEsc);
     return () => {
@@ -52,10 +55,14 @@ const RegisterForm = () => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
-    
+
     const { password, confirmPassword } = registerData;
     if (password !== confirmPassword) {
-      setMessage('Las contraseñas no coinciden');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error de validación',
+        text: 'Las contraseñas no coinciden. Por favor, revísalas.',
+      });
       setLoading(false);
       return;
     }
@@ -64,17 +71,31 @@ const RegisterForm = () => {
       const res = await fetch('https://calendly-18rn.onrender.com/user/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(registerData)
+        body: JSON.stringify(registerData),
       });
       const data = await res.json();
       if (data.success) {
-        setMessage('¡Registro exitoso! Redirigiendo...');
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro Exitoso!',
+          text: 'Serás redirigido al inicio de sesión.',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         setTimeout(() => navigate('/login'), 1500);
       } else {
-        setMessage(data.message || 'Error al registrarse');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al registrar',
+          text: data.message || 'Ocurrió un error inesperado. Inténtalo de nuevo.',
+        });
       }
     } catch (err) {
-      setMessage('Error de conexión');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error de Conexión',
+        text: 'No se pudo conectar con el servidor. Verifica tu conexión a internet.',
+      });
     } finally {
       setLoading(false);
     }
@@ -92,7 +113,7 @@ const RegisterForm = () => {
         <h1 className="auth-title">UtshViajes</h1>
         <p className="auth-subtitle">Los mejores países a un precio de ensueño</p>
         <img src="/imageR.png" alt="Imagen" className="auth-image" />
-        
+
         <form onSubmit={handleRegister} className="auth-form">
           {/* Email */}
           <div className="form-section">
@@ -115,7 +136,7 @@ const RegisterForm = () => {
               className="auth-input"
               required
             />
-            
+
             <h3 className="section-title">Confirmar Contraseña</h3>
             <input
               type="password"
@@ -125,22 +146,32 @@ const RegisterForm = () => {
               className="auth-input"
               required
             />
-            
+
             <div className="password-rules">
               <p>La contraseña debe de tener al menos:</p>
               <ul>
-                <li>1 mayúscula <span>{hasUpper ? '✓' : '0/1'}</span></li>
-                <li>1 minúscula <span>{hasLower ? '✓' : '0/1'}</span></li>
-                <li>1 número <span>{hasNumber ? '✓' : '0/1'}</span></li>
-                <li>10 carácteres <span>{hasMinLength ? '✓' : `${registerData.password.length}/10`}</span></li>
+                <li>
+                  1 mayúscula{' '}
+                  <span>{hasUpper ? '✓' : '0/1'}</span>
+                </li>
+                <li>
+                  1 minúscula{' '}
+                  <span>{hasLower ? '✓' : '0/1'}</span>
+                </li>
+                <li>
+                  1 número{' '}
+                  <span>{hasNumber ? '✓' : '0/1'}</span>
+                </li>
+                <li>
+                  10 carácteres{' '}
+                  <span>{hasMinLength ? '✓' : `${registerData.password.length}/10`}</span>
+                </li>
               </ul>
             </div>
-
           </div>
 
           {/* Contraseña */}
           <div className="form-section">
-
             <h3 className="section-title">Nombre</h3>
             <input
               type="text"
@@ -149,15 +180,14 @@ const RegisterForm = () => {
               onChange={handleChange}
               className="auth-input"
               required
-            />             
-
+            />
 
             <h3 className="section-title">Pregunta de seguridad</h3>
             <div className="custom-select" ref={sqRef}>
               <button
                 type="button"
                 className="select-trigger auth-input"
-                onClick={() => setIsSQOpen(o => !o)}
+                onClick={() => setIsSQOpen((o) => !o)}
                 aria-haspopup="listbox"
                 aria-expanded={isSQOpen}
               >
@@ -178,9 +208,13 @@ const RegisterForm = () => {
                   ))}
                 </ul>
               )}
-              <input type="hidden" name="securityQuestion" value={registerData.securityQuestion} />
+              <input
+                type="hidden"
+                name="securityQuestion"
+                value={registerData.securityQuestion}
+              />
             </div>
-            
+
             <h3 className="section-title">Respuesta de seguridad</h3>
             <input
               type="text"
@@ -190,12 +224,7 @@ const RegisterForm = () => {
               className="auth-input"
               required
             />
-
           </div>
-
-
-
-
 
           <button type="submit" className="auth-button" disabled={loading}>
             {loading ? 'Registrando...' : 'Registrarse'}
@@ -203,10 +232,7 @@ const RegisterForm = () => {
         </form>
 
         <div className="auth-footer">
-          <button 
-            onClick={() => navigate('/login')} 
-            className="auth-link-button"
-          >
+          <button onClick={() => navigate('/login')} className="auth-link-button">
             Ya tengo una cuenta
           </button>
         </div>
